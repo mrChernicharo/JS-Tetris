@@ -76,16 +76,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   draw();
 
-  let timerId = setInterval(moveDown, 1000);
+  let timerId = setInterval(moveDown, 400);
 
   function control(e) {
     if (e.keyCode === 37) {
-      console.log('moved left');
       moveLeft();
     } else if (e.keyCode === 38) {
-      // rotate
+      rotate();
     } else if (e.keyCode === 39) {
-      // moveRight()
+      moveRight();
     } else if (e.keyCode === 40) {
       moveDown();
     }
@@ -121,6 +120,29 @@ document.addEventListener("DOMContentLoaded", () => {
     if (current.some((index) => squares[currentPosition + index].classList.contains('taken'))) {
       currentPosition += 1;
     }
+
+    draw();
+  }
+  function moveRight() {
+    undraw();
+    const isAtRightEdge = current.some((index) => (currentPosition + index) % width === 9);
+
+    if (!isAtRightEdge) currentPosition += 1;
+
+    if (current.some((index) => squares[currentPosition + index].classList.contains('taken'))) {
+      currentPosition += 1;
+    }
+
+    draw();
+  }
+  function rotate() {
+    undraw();
+    if (currentRotation === 3) {
+      currentRotation = 0;
+    } else if (currentRotation <= 2) {
+      currentRotation += 1;
+    }
+    current = theTertrominoes[random][currentRotation];
 
     draw();
   }
