@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
@@ -37,10 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
     [0, 1, width, width + 1],
   ];
   const iTetromino = [
-    [width, width + 1, width + 2, width + 3],
-    [2, width + 2, width * 2 + 2, width * 3 + 2],
-    [width * 2, width * 2 + 1, width * 2 + 2, width * 2 + 3],
     [1, width + 1, width * 2 + 1, width * 3 + 1],
+    [width, width + 1, width + 2, width + 3],
+    [1, width + 1, width * 2 + 1, width * 3 + 1],
+    [width, width + 1, width + 2, width + 3],
   ];
   const zTetromino = [
     [0, width, width + 1, width * 2 + 1],
