@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-alert */
 /* eslint-disable no-undef */
 /* eslint-disable quotes */
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   // tetrominoes array
-  const tertrominoes = [
+  const theTertrominoes = [
     lTetromino,
     tTetromino,
     oTetromino,
@@ -53,12 +54,25 @@ document.addEventListener("DOMContentLoaded", () => {
     zTetromino,
   ];
 
-  const currentPosition = 4;
+  let currentPosition = 4;
+  let currentRotation = 0;
+
+  let random = Math.floor(Math.random() * theTertrominoes.length);
+  let current = theTertrominoes[random][currentRotation];
 
   function draw() {
-    tertrominoes[3][3].forEach((index) => {
+    current.forEach((index) => {
       squares[currentPosition + index].classList.add("tetromino");
     });
   }
+  function undraw() {
+    current.forEach((index) => {
+      squares[currentPosition + index].classList.remove("tetromino");
+    });
+  }
   draw();
+
+  setTimeout(() => undraw(), 3000);
+  setTimeout(() => draw(), 4000);
+  setTimeout(() => undraw(), 7000);
 });
