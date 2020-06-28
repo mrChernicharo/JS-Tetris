@@ -1,12 +1,16 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
 /* eslint-disable prefer-const */
 /* eslint-disable no-alert */
 /* eslint-disable no-undef */
 /* eslint-disable quotes */
-
+let count = 0;
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".grid");
 
   const squares = Array.from(document.querySelectorAll(".grid div"));
+  squares.map((item) => (item.innerText = count++));
 
   const width = 10;
 
@@ -72,7 +76,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   draw();
 
-  setTimeout(() => undraw(), 3000);
-  setTimeout(() => draw(), 4000);
-  setTimeout(() => undraw(), 7000);
+  let timerId = setInterval(moveDown, 200);
+
+  function moveDown() {
+    undraw();
+    currentPosition += width;
+    draw();
+    freeze();
+  }
+
+  function freeze() {
+    if (
+      current.some((index) => squares[currentPosition + index + width].classList.contains("taken"))
+    ) {
+      current.forEach((index) => squares[currentPosition + index].classList.add("taken"));
+      random = Math.floor(Math.random() * theTertrominoes.length);
+      current = theTertrominoes[random][currentRotation];
+      currentPosition = 4;
+      draw();
+    }
+  }
 });
