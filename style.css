@@ -1,9 +1,19 @@
 * {
   font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+}
+
+.grid {
+  width: 200px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap; /* <== nice property*/
+  background: yellow;
 }
 
 .grid > div {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   border: 1px solid black;
+  border-collapse: collapse;
 }
