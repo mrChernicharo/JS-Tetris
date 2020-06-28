@@ -78,6 +78,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let timerId = setInterval(moveDown, 1000);
 
+  function control(e) {
+    if (e.keyCode === 37) {
+      console.log('moved left');
+      moveLeft();
+    } else if (e.keyCode === 38) {
+      // rotate
+    } else if (e.keyCode === 39) {
+      // moveRight()
+    } else if (e.keyCode === 40) {
+      moveDown();
+    }
+  }
+  document.addEventListener('keyup', control);
+
+
   function moveDown() {
     undraw();
     currentPosition += width;
