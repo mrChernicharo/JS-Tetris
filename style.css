@@ -19,3 +19,7 @@
   border-collapse: collapse;
   font-size: 8px;
 }
+
+.tetromino {
+  background-color: lightgreen;
+}
