@@ -19,10 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
     [0, width, width + 1, width + 2],
   ];
 
-  const tertrominoes = [lTetromino];
+  const tTetromino = [
+    [0, 1, 2, width + 1],
+    [1, width, width + 1, width * 2 + 1],
+    [1, width, width + 1, width + 2],
+    [1, width, width + 1, width + 2],
+  ];
+
+  const tertrominoes = [lTetromino, tTetromino];
 
   function draw() {
-    lTetromino[2].forEach((index) => {
+    tTetromino[3].forEach((index) => {
       squares[index].classList.add("tetromino");
     });
   }
