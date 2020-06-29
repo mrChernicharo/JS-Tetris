@@ -9,14 +9,13 @@
 let count = 0;
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".grid");
-
   const squares = Array.from(document.querySelectorAll(".grid div"));
-  squares.map((item) => (item.innerText = count++));
-
-  const width = 10;
-
   const scoreDisplay = document.querySelector("#score");
   const startBtn = document.querySelector("#start-button");
+  // squares.map((item) => (item.innerText = count++));
+  const width = 10;
+  let nextRandom = 0;
+
 
   // tetromino definitions
   const lTetromino = [
@@ -29,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     [0, 1, 2, width + 1],
     [1, width, width + 1, width * 2 + 1],
     [1, width, width + 1, width + 2],
-    [1, width, width + 1, width + 2],
+    [0, width, width + 1, width * 2],
   ];
   const oTetromino = [
     [0, 1, width, width + 1],
@@ -105,10 +104,12 @@ document.addEventListener("DOMContentLoaded", () => {
       current.some((index) => squares[currentPosition + index + width].classList.contains("taken"))
     ) {
       current.forEach((index) => squares[currentPosition + index].classList.add("taken"));
-      random = Math.floor(Math.random() * theTertrominoes.length);
+      random = nextRandom;
+      nextRandom = Math.floor(Math.random() * theTertrominoes.length);
       current = theTertrominoes[random][currentRotation];
       currentPosition = 4;
       draw();
+      displayShape();
     }
   }
 
@@ -144,7 +145,27 @@ document.addEventListener("DOMContentLoaded", () => {
       currentRotation += 1;
     }
     current = theTertrominoes[random][currentRotation];
-
     draw();
+  }
+
+  const displaySquares = document.querySelectorAll('.mini-grid div');
+  const displayWidth = 4;
+  let displayIndex = 0;
+
+  const upNextTetromino = [
+    [1, 2, displayWidth + 1, displayWidth * 2 + 1],
+    [0, 1, 2, displayWidth + 1],
+    [0, 1, displayWidth, displayWidth + 1],
+    [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1],
+    [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1],
+  ];
+
+  function displayShape() {
+    displaySquares.forEach((square) => {
+      square.classList.remove('tetromino');
+    });
+    upNextTetromino[nextRandom].forEach((index) => {
+      displaySquares[displayIndex + index].classList.add('tetromino');
+    });
   }
 });
